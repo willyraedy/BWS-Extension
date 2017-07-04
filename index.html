@@ -1,0 +1,113 @@
+{% extends "layout.html" %} {% block content %}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class='container-fluid'>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          <div class='row'>
+            <div class='col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4' id='grade-box'>
+              <h1 class="modal-title text-center" id="grade-letter">F</h1>
+            </div>
+          </div>
+          <h3 class='text-center' id='grade-statement'>United Airlines has an 'F' rating from the Better World Shopper Guide.</h3>
+          <p class='text-center' id='grade-explanation'>Only 2% of companies earned an 'F' rating. What does this  mean?</p>
+
+        </div>
+
+      </div>
+      <div class="modal-body">
+        <h4>Consider shopping at one of these companies instead:</h4>
+        <!--<div class='container'>-->
+          <div class='row'>
+            <div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>
+              <span class="label label-success">A Rating</span>
+              <hr>
+              <ul>
+                <li>N/A</li>
+                <li>
+                  <a class="show-more" data-toggle="collapse" href="#a-rated-co" aria-expanded="false" aria-controls="a-rated-co">
+                   Show more...
+                  </a>
+                  <div class="collapse" id="a-rated-co">
+                    <div class="card card-block">
+                      <ul id='a-list'>
+                        <li><a href='#'>Placeholder</a></li>
+                        <li><a href='#'>Placeholder</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>
+              <span class="label label-primary">B Rating</span>
+              <hr>
+              <ul id='a-list'>
+                <li><a href='#'>Jet Blue</a></li>
+                <li><a href='#'>Southwest Airlines</a></li>
+                <li>
+                  <a class="show-more" data-toggle="collapse" href="#b-rated-co" aria-expanded="false" aria-controls="b-rated-co">
+                   Show more...
+                  </a>
+                  <div class="collapse" id="b-rated-co">
+                    <div class="card card-block">
+                      <ul id='a-list'>
+                        <li><a href='#'>Alask Air</a></li>
+                        <li><a href='#'>Horizon</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>
+              <span class="label label-default">C Rating</span>
+              <hr>
+              <ul id='a-list'>
+                <li><a href='#'>Spirit</a></li>
+                <li><a href='#'>Easy Jet</a></li>
+                <li>
+                  <a class="show-more" data-toggle="collapse" href="#c-rated-co" aria-expanded="false" aria-controls="c-rated-co">
+                   Show more...
+                  </a>
+                  <div class="collapse" id="c-rated-co">
+                    <divclass="card card-block">
+                      <ul id='a-list'>
+                        <li><a href='#'>Spirit</a></li>
+                        <li><a href='#'>Easy Jet</a></li>
+                      </ul>
+                      </div>
+                  </div>
+                </li>
+              </ul>
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+
+
+          <!--<h5>Tooltips in a modal</h5>
+          <p><a href="#" class="tooltip-test" title="Tooltip">This link</a> and <a href="#" class="tooltip-test" title="Tooltip">that link</a>            have tooltips on hover.</p>-->
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

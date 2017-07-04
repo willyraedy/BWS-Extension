@@ -1,0 +1,26 @@
+{
+  "name": "Content Script test",
+  "version": "0.1",
+  "description": "Content Script test",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "page": "layout.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": ["bootstrap.css", "style.css"],
+      "js": ["jquery.js", "bootstrap.js", "cs.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2
+}
