@@ -1,11 +1,15 @@
 
 function getCompanyName(curURL) {
   let tempArr = curURL.split('.')
-  let idx = tempArr.indexOf('com') - 1;
+  let idx = tempArr.indexOf('www') + 1;
   return tempArr[idx];
 }
 
+console.log(window.location)
+
 let domain = getCompanyName(window.location.hostname)
+
+console.log(domain)
 
 // hardcoded obj
 let airlineCompanies = {
