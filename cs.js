@@ -99,16 +99,18 @@ if (airlineCompanies.hasOwnProperty(domain) && airlineCompanies[domain].grade.se
 
   chrome.runtime.sendMessage(messageObj, function(response){
 
-    let modal = document.createElement('div')
-    modal.innerHTML = response.modalString;
+    // let modal = document.createElement('div')
+    // modal.innerHTML = response.modalString;
 
-    const modalButton = document.createElement('div')
-    modalButton.innerHTML = response.buttonString
+    // const modalButton = document.createElement('div')
+    // modalButton.innerHTML = response.buttonString
 
-    const bodyArr = document.getElementsByTagName('body')
 
     document.addEventListener('DOMContentLoaded', function () {
+      const bodyArr = document.getElementsByTagName('body')
       const bodyEl = bodyArr[0]
+
+      console.log('Something')
 
       const hostDiv = document.createElement('div');
       const shadowRoot = hostDiv.attachShadow({ mode: 'open' });
@@ -129,9 +131,17 @@ if (airlineCompanies.hasOwnProperty(domain) && airlineCompanies[domain].grade.se
         </script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         ${response.modalString}
-        ${response.buttonString}`;
+        ${response.buttonString}
+        <script>
+          var buttonDOMEl = document.querySelector('#test-id')
+          $(buttonDOMEl).removeClass('btn-warning')
+        </script>
+        `;
 
       bodyEl.appendChild(hostDiv)
+
+      // trigger event
+      $('#shadow-root').trigger('click.bs.modal.data-api')
 
     });
 
