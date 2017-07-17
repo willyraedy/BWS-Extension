@@ -5,11 +5,7 @@ function getCompanyName(curURL) {
   return tempArr[idx];
 }
 
-console.log(window.location)
-
 let domain = getCompanyName(window.location.hostname)
-
-console.log(domain)
 
 // hardcoded obj
 let airlineCompanies = {
@@ -89,16 +85,57 @@ if (airlineCompanies.hasOwnProperty(domain) && airlineCompanies[domain].grade.se
     airlineCompanies: airlineCompanies
   }
 
+// CSS inheriance problems
+  // chrome.runtime.sendMessage(messageObj, function(response){
+
+  //   let $modal = $(response.modalString)
+  //   let $button = $(response.buttonString)
+  //   $(function() {
+  //     $('body').append($button)
+  //     $('body').append($modal)
+  //     $($button).trigger('click.bs.modal.data-api')
+  //   })
+  // });
+
   chrome.runtime.sendMessage(messageObj, function(response){
 
-    let $modal = $(response.modalString)
-    let $button = $(response.buttonString)
-    $(function() {
-      $('body').append($button)
-      $('body').append($modal)
-      $($button).trigger('click.bs.modal.data-api')
+    let modal = document.createElement('div')
+    modal.innerHTML = response.modalString;
+
+    const modalButton = document.createElement('div')
+    modalButton.innerHTML = response.buttonString
+
+    const bodyArr = document.getElementsByTagName('body')
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const bodyEl = bodyArr[0]
+
+      const hostDiv = document.createElement('div');
+      const shadowRoot = hostDiv.attachShadow({ mode: 'open' });
+      shadowRoot.innerHTML = `
+        <style>
+          :host {
+            all: initial; /* 1st rule so subsequent properties are reset. */
+            display: block;
+            background: white;
+          }
+        </style>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        ${response.modalString}
+        ${response.buttonString}`;
+
+      bodyEl.appendChild(hostDiv)
+
+    });
+
     })
-  });
 }
 
 
