@@ -85,26 +85,7 @@ if (airlineCompanies.hasOwnProperty(domain) && airlineCompanies[domain].grade.se
     airlineCompanies: airlineCompanies
   }
 
-// CSS inheriance problems
-  // chrome.runtime.sendMessage(messageObj, function(response){
-
-  //   let $modal = $(response.modalString)
-  //   let $button = $(response.buttonString)
-  //   $(function() {
-  //     $('body').append($button)
-  //     $('body').append($modal)
-  //     $($button).trigger('click.bs.modal.data-api')
-  //   })
-  // });
-
   chrome.runtime.sendMessage(messageObj, function(response){
-
-    // let modal = document.createElement('div')
-    // modal.innerHTML = response.modalString;
-
-    // const modalButton = document.createElement('div')
-    // modalButton.innerHTML = response.buttonString
-
 
     document.addEventListener('DOMContentLoaded', function () {
       const bodyArr = document.getElementsByTagName('body');
@@ -117,6 +98,8 @@ if (airlineCompanies.hasOwnProperty(domain) && airlineCompanies[domain].grade.se
       shadowRoot.innerHTML = `
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
 
         <style>
 
@@ -201,40 +184,44 @@ if (airlineCompanies.hasOwnProperty(domain) && airlineCompanies[domain].grade.se
           #a-rated-co, #b-rated-co, #c-rated-co {
             margin: 0;
           }
+
         </style>
         <div>
           ${response.modalString}
         </div>
         `;
 
+      // Can't get collapse to work; suspect js inside modal not working
+
+      //  const shadowJQueryUIScript = document.createElement('script');
+      //  shadowJQueryUIScript.setAttribute('src', 'https://code.jquery.com/ui/1.12.1/jquery-ui.js')
+      //  shadowJQueryUIScript.setAttribute('integrity', 'sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=')
+      //  shadowJQueryUIScript.setAttribute('crossorigin', 'anonymous')
+      //  shadowRoot.appendChild(shadowJQueryUIScript);
+
+      //  const shadowJQueryScript = document.createElement('script');
+      //  shadowJQueryScript.setAttribute('src', 'https://code.jquery.com/jquery-3.2.1.js')
+      //  shadowJQueryScript.setAttribute('integrity', 'sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=')
+      //  shadowJQueryScript.setAttribute('crossorigin', 'anonymous')
+      //  shadowRoot.appendChild(shadowJQueryScript);
+
+      // const shadowBootstrapScript = document.createElement('script');
+      // shadowBootstrapScript.setAttribute('src', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+      // shadowBootstrapScript.setAttribute('integrity', 'sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa')
+      // shadowBootstrapScript.setAttribute('crossorigin', 'anonymous')
+      // shadowRoot.appendChild(shadowBootstrapScript);
+
+      const testScript = document.createElement('script');
+      testScript.text = 'console.log("Please be visible")';
+      shadowRoot.appendChild(testScript);
+
       bodyEl.appendChild(hostDiv);
 
       const modalInShadow = shadowRoot.querySelector('#bws-modal')
       $(modalInShadow).modal('show').css({display: 'block'})
-
-        // const modalButton = shadowRoot.querySelector('#test-id')
-        // console.log(modalButton)
-
-        // $(modalButton).on('click', function() {
-        //   console.log('Will this work?')
-        //   $(modalButton).hide()
-        // });
-
-        // modalButton.attachListener('click', e => {
-        //     console.log('I was clicked');
-        //   })
-
 
     });
 
     })
 }
 
-
-
-
-
-
-{/*<script>
-          $('#bws-modal').modal('show')
-        </script>*/}

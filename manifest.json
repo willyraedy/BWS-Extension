@@ -16,7 +16,7 @@
         "http://*/*",
         "https://*/*"
       ],
-      "css": ["bootstrap.css", "style.css"],
+      "css": ["bootstrap.css" ],
       "js": ["jquery.js", "bootstrap.js", "cs.js"],
       "run_at": "document_start",
       "all_frames": true
