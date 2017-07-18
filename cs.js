@@ -7,85 +7,7 @@ function getCompanyName(curURL) {
 
 let domain = getCompanyName(window.location.hostname)
 
-// hardcoded obj
-let airlineCompanies = {
-  id: 'dev',
-  southwest: {
-     brand: 'Southwest',
-     grade: 'B',
-     override: false,
-     known: false,
-     domain: 'southwest' },
-  jetblue: {
-     brand: 'JetBlue',
-     grade: 'B',
-     override: false,
-     known: false,
-     domain: 'jetblue' },
-  delta: {
-     brand: 'Delta',
-     grade: 'D',
-     override: false,
-     known: false,
-     domain: 'delta' },
-  united: {
-     brand: 'United',
-     grade: 'F',
-     override: false,
-     known: false,
-     domain: 'united' },
-  aa: {
-     brand: 'American Airlines',
-     grade: 'F',
-     override: false,
-     known: false,
-     domain: 'aa' },
-  flyfrontier: {
-     brand: 'Frontier',
-     grade: 'B',
-     override: false,
-     known: false,
-     domain: 'flyfrontier' },
-  virginamerica: {
-     brand: 'Virgin',
-     grade: 'B',
-     override: false,
-     known: false,
-     domain: 'virginamerica' },
-  spirit: {
-     brand: 'Spirit',
-     grade: 'C',
-     override: false,
-     known: false,
-     domain: 'spirit' },
-  alaskaair: {
-    brand: 'Alaskan Airlines',
-    grade: 'B',
-    override: false,
-    known: false,
-    domain: 'alaskaair' },
-  britishairways: {
-    brand: 'British Airways',
-    grade: 'C',
-    override: false,
-    known: false,
-    domain: 'britishairways' },
-  easyjet: {
-    brand: 'Easy Jet',
-    grade: 'C',
-    override: false,
-    known: false,
-    domain: 'easyjet' }
-  }
-
-if (airlineCompanies.hasOwnProperty(domain) && airlineCompanies[domain].grade.search(/D|F/) !== -1) {
-
-  const messageObj = {
-    target: airlineCompanies[domain],
-    airlineCompanies: airlineCompanies
-  }
-
-  chrome.runtime.sendMessage(messageObj, function(response){
+  chrome.runtime.sendMessage({domain}, function(response){
 
     document.addEventListener('DOMContentLoaded', function () {
       const bodyArr = document.getElementsByTagName('body');
@@ -192,6 +114,7 @@ if (airlineCompanies.hasOwnProperty(domain) && airlineCompanies[domain].grade.se
         `;
 
       // Can't get collapse to work; suspect js inside modal not working
+      // Getting weird error in jquery script - TypeError: p.easing[this.easing] is not a function
 
       //  const shadowJQueryUIScript = document.createElement('script');
       //  shadowJQueryUIScript.setAttribute('src', 'https://code.jquery.com/ui/1.12.1/jquery-ui.js')
@@ -220,8 +143,16 @@ if (airlineCompanies.hasOwnProperty(domain) && airlineCompanies[domain].grade.se
       const modalInShadow = shadowRoot.querySelector('#bws-modal')
       $(modalInShadow).modal('show').css({display: 'block'})
 
+      // bootstrap said you had to activate popovers specifically
+
+      // const popoverInShadow = shadowRoot.querySelector('[data-toggle="popover"]')
+      // $(popoverInShadow).popover()
+
+
+
     });
 
-    })
-}
+  })
+
+// }
 

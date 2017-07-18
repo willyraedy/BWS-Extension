@@ -1,7 +1,7 @@
 {
-  "name": "Content Script test",
+  "name": "BWS",
   "version": "0.1",
-  "description": "Content Script test",
+  "description": "Bring Better World Shopping Guide to your browser",
   "permissions": [
     "tabs",
     "http://*/*",
