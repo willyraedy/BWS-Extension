@@ -107,41 +107,123 @@ if (airlineCompanies.hasOwnProperty(domain) && airlineCompanies[domain].grade.se
 
 
     document.addEventListener('DOMContentLoaded', function () {
-      const bodyArr = document.getElementsByTagName('body')
-      const bodyEl = bodyArr[0]
-
-      console.log('Something')
+      const bodyArr = document.getElementsByTagName('body');
+      const bodyEl = bodyArr[0];
 
       const hostDiv = document.createElement('div');
+      hostDiv.setAttribute("style", "all:initial");
       const shadowRoot = hostDiv.attachShadow({ mode: 'open' });
+
       shadowRoot.innerHTML = `
-        <style>
-          :host {
-            all: initial; /* 1st rule so subsequent properties are reset. */
-            display: block;
-            background: white;
-          }
-        </style>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous">
-        </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        ${response.modalString}
-        ${response.buttonString}
-        <script>
-          var buttonDOMEl = document.querySelector('#test-id')
-          $(buttonDOMEl).removeClass('btn-warning')
-        </script>
+
+        <style>
+
+          .f-box {
+            background-color: #ea3b3b;
+            border-radius: 20px;
+          }
+
+          .d-box {
+            background-color: #ff9933;
+            border-radius: 20px;
+          }
+
+          #grade-letter {
+            font-size: 100px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            line-height: 120px;
+            color: white;
+            margin: 0 }
+
+          .label {
+            text-align: center; }
+
+          .modal-body span {
+            display: table;
+            margin: 0 auto; }
+
+          .modal-body ul {
+            list-style: none;
+            text-align: center;
+            padding: 0; }
+
+          .modal-body h4 {
+            margin-bottom: 25px; }
+
+          .modal-body button {
+            text-align: center;
+            display: inline; }
+
+          .modal-dialog hr {
+            margin: 5px 0 0 15px; }
+
+          .show-more {
+            color: gray; }
+
+          .modal-dialog p {
+            color: black;
+            font-size: 15px;
+          }
+
+          .modal-dialog h3 {
+            color: black;
+            font-size: 25px;
+            line-height: 35px;
+            font-weight: bold;
+            padding: 20px;
+            margin: 0;
+          }
+
+          .modal-dialog h4 {
+            color: black;
+            font-size: 20px;
+
+          }
+
+          #my-modal-dialog {
+            background-color: transparent;
+          }
+
+          .modal-dialog span {
+            font-size: 14px;
+          }
+          .modal-dialog a {
+            font-size: 14px;
+          }
+
+          .modal-dialog * {
+            font-family: Arial, Helvetica, sans-serif;
+          }
+
+          #a-rated-co, #b-rated-co, #c-rated-co {
+            margin: 0;
+          }
+        </style>
+        <div>
+          ${response.modalString}
+        </div>
         `;
 
-      bodyEl.appendChild(hostDiv)
+      bodyEl.appendChild(hostDiv);
 
-      // trigger event
-      $('#shadow-root').trigger('click.bs.modal.data-api')
+      const modalInShadow = shadowRoot.querySelector('#bws-modal')
+      $(modalInShadow).modal('show').css({display: 'block'})
+
+        // const modalButton = shadowRoot.querySelector('#test-id')
+        // console.log(modalButton)
+
+        // $(modalButton).on('click', function() {
+        //   console.log('Will this work?')
+        //   $(modalButton).hide()
+        // });
+
+        // modalButton.attachListener('click', e => {
+        //     console.log('I was clicked');
+        //   })
+
 
     });
 
@@ -149,3 +231,10 @@ if (airlineCompanies.hasOwnProperty(domain) && airlineCompanies[domain].grade.se
 }
 
 
+
+
+
+
+{/*<script>
+          $('#bws-modal').modal('show')
+        </script>*/}
