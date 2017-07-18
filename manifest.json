@@ -7,6 +7,11 @@
     "http://*/*",
     "https://*/*"
   ],
+  "browser_action": {
+    "default_icon": "bws_logo.png",
+    "default_title": "BWS",
+    "default_popup": "popup.html"
+  },
   "background": {
     "page": "layout.html"
   },
