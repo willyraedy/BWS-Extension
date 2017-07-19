@@ -73,11 +73,9 @@ let airlineCompanies = {
 
   chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-      console.log('inside callback')
 
       if (request.type === 'request-current-company') {
-        console.log('Inside if logic')
-        console.log('domain: ', request.domain)
+
         sendResponse(airlineCompanies[request.domain]);
 
       } else if (currentBrandObj.domain === request.domain) {

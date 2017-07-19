@@ -8,33 +8,40 @@ function getCompanyName(curURL) {
   return tempArr[idx];
 }
 
+chrome.storage.local.get('whitelist', function (whitelistedObj) {
+  console.log('whitelistObj: ', whitelistedObj)
+  const whitelist = whitelistedObj.whitelist ? whitelistedObj.whitelist : [];
+  console.log('Whitelist: ', whitelist)
+
 chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs) {
-    console.log(tabs)
 
     let domain = getCompanyName(tabs[0].url)
 
   chrome.runtime.sendMessage({type: 'request-current-company', domain}, function(response){
 
-    $('#whitelist').on('click', function() {
-    chrome.storage.local.get({whitelist: []}, function (result) {
-      // the input argument is ALWAYS an object containing the queried keys
-      // so we select the key we need
-      var whitelistedComps = result.whitelist;
-      whitelistedComps.push(currentCompany.domain);
-      // set the new array value to the same key
-      console.log(whitelistedComps)
-      chrome.storage.local.set({whitelist: whitelistedComps}, function () {
-          // you can use strings instead of objects
-          // if you don't  want to define default values
-          chrome.storage.local.get('whitelist', function (result) {
-              $('#whitelist').text(`BWSG will no longer show modals on ${currentCompany.domain}.com`)
-          });
-      });
-  });
-  })
-
     currentCompany = response;
+
     if (currentCompany) {
+      if (!whitelist.includes(currentCompany.domain)) {
+
+        $('#whitelist').on('click', function () {
+
+          chrome.storage.local.get({ whitelist: [] }, function (result) {
+            var whitelistedComps = result.whitelist;
+            whitelistedComps.push(currentCompany.domain);
+
+            chrome.storage.local.set({ whitelist: whitelistedComps }, function () {
+              chrome.storage.local.get('whitelist', function (result) {
+                console.log('Successfully added to whitelist')
+                $('#whitelist').text(`BWSG will no longer show modals on ${result}.com`)
+              });
+            });
+          });
+        })
+      } else {
+        $('#whitelist').text(`Placeholder code`)
+      }
+
       $('#grade-statement').text(`${currentCompany.brand} has an ${currentCompany.grade} rating`);
 
       switch (currentCompany.grade) {
@@ -59,9 +66,10 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 
       }
 
+
     }
   });
 
 });
 
-
+});
