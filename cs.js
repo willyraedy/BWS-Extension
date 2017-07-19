@@ -8,6 +8,7 @@ function getCompanyName(curURL) {
 let domain = getCompanyName(window.location.hostname)
 
   chrome.runtime.sendMessage({domain}, function(response){
+    console.log('Extension response: ', response)
 
     if (response === 'no-modal') return;
 

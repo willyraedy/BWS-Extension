@@ -4,6 +4,7 @@
   "description": "Bring Better World Shopping Guide to your browser",
   "permissions": [
     "tabs",
+    "storage",
     "http://*/*",
     "https://*/*"
   ],

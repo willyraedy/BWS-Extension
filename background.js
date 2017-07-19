@@ -69,39 +69,51 @@ let airlineCompanies = {
     domain: 'easyjet' }
   }
 
-  let currentBrandObj = null;
+  let currentBrandObj = {};
 
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
+chrome.storage.local.get('whitelist', function (whitelistedObj) {
 
-    if (request === 'request-current-company') {
-      sendResponse(currentBrandObj);
-    } else if (airlineCompanies.hasOwnProperty(request.domain)) {
+  chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        console.log('Whitelist response: ', whitelistedObj)
 
-      currentBrandObj = airlineCompanies[request.domain]
+      if (request === 'request-current-company') {
+        sendResponse(currentBrandObj);
+      } else if (currentBrandObj.domain === request.domain) {
+        sendResponse('no-modal');
+      } else if (airlineCompanies.hasOwnProperty(request.domain)) {
 
-      if (currentBrandObj.grade.search(/D|F/) !== -1) {
+        currentBrandObj = airlineCompanies[request.domain]
 
-        $('#grade-letter').text(currentBrandObj.grade)
-        $('#grade-statement').text(`${currentBrandObj.brand} has an '${currentBrandObj.grade}' rating from the Better World Shopper Guide.`)
 
-        if (currentBrandObj.grade === 'F') {
-          $('#grade-explanation').text(`Only 2% of companies earned an 'F' rating.`)
-          $('#grade-box').removeClass('d-box').addClass('f-box')
+        if (currentBrandObj.grade.search(/D|F/) !== -1) {
+
+              if (whitelistedObj.whitelist.includes(currentBrandObj.domain)) {
+                sendResponse('no-modal');
+              } else {
+                $('#grade-letter').text(currentBrandObj.grade)
+                $('#grade-statement').text(`${currentBrandObj.brand} has an '${currentBrandObj.grade}' rating from the Better World Shopper Guide.`)
+
+                if (currentBrandObj.grade === 'F') {
+                  $('#grade-explanation').text(`Only 2% of companies earned an 'F' rating.`)
+                  $('#grade-box').removeClass('d-box').addClass('f-box')
+                } else {
+                  $('#grade-explanation').text(`Approximately 18% of companies earned a 'D' rating.`)
+                  $('#grade-box').removeClass('f-box').addClass('d-box')
+                }
+
+                let modalString = $('#modal-wrapper').html()
+                sendResponse({modalString});
+              }
+
         } else {
-          $('#grade-explanation').text(`Approximately 18% of companies earned a 'D' rating.`)
-          $('#grade-box').removeClass('f-box').addClass('d-box')
+          sendResponse('no-modal');
         }
-
-        let modalString = $('#modal-wrapper').html()
-        let buttonString = $('#button-wrapper').html()
-        sendResponse({modalString, buttonString});
 
       } else {
         sendResponse('no-modal');
       }
 
-    }
-
-
+  });
 });
+
