@@ -71,14 +71,15 @@ let airlineCompanies = {
 
   let currentBrandObj = {};
 
-
-
   chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-      console.log('Sender obj: ', sender)
+      console.log('inside callback')
 
-      if (request === 'request-current-company') {
-        sendResponse(currentBrandObj);
+      if (request.type === 'request-current-company') {
+        console.log('Inside if logic')
+        console.log('domain: ', request.domain)
+        sendResponse(airlineCompanies[request.domain]);
+
       } else if (currentBrandObj.domain === request.domain) {
         sendResponse('no-modal');
       } else if (airlineCompanies.hasOwnProperty(request.domain)) {
