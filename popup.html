@@ -5,12 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+
+  <link href="bootstrap.css" rel="stylesheet">
   <script src='jquery.js'></script>
   <script src="popup.js"></script>
 
 </head>
 <body>
-  <h1>Should show up below</h1>
-  <p id="test"></p>
+  <div class="panel panel-default" style="width: 400px">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Better World Shopping Guide</div>
+  <div class="panel-body">
+    <h5 id="grade-statement">This company does not have a rating</h5>
+    <p id="grade-explanation"></p>
+  </div>
+
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item">Whitelist this company</li>
+    <li class="list-group-item">Pause Better World Shopping Guide</li>
+  </ul>
+</div>
 </body>
 </html>

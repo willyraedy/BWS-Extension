@@ -9,6 +9,8 @@ let domain = getCompanyName(window.location.hostname)
 
   chrome.runtime.sendMessage({domain}, function(response){
 
+    if (response === 'no-modal') return;
+
     document.addEventListener('DOMContentLoaded', function () {
       const bodyArr = document.getElementsByTagName('body');
       const bodyEl = bodyArr[0];
