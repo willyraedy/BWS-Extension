@@ -7,8 +7,9 @@ function getCompanyName(curURL) {
 
 let domain = getCompanyName(window.location.hostname)
 
-  chrome.runtime.sendMessage({domain}, function(response){
-    console.log('Extension response: ', response)
+chrome.storage.local.get('whitelist', function (whitelistedObj) {
+
+  chrome.runtime.sendMessage({domain, whitelist: whitelistedObj.whitelist}, function(response){
 
     if (response === 'no-modal') return;
 
@@ -157,5 +158,5 @@ let domain = getCompanyName(window.location.hostname)
 
   })
 
-// }
+});
 

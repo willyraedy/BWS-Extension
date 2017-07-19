@@ -71,11 +71,11 @@ let airlineCompanies = {
 
   let currentBrandObj = {};
 
-chrome.storage.local.get('whitelist', function (whitelistedObj) {
+
 
   chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log('Whitelist response: ', whitelistedObj)
+      console.log('Sender obj: ', sender)
 
       if (request === 'request-current-company') {
         sendResponse(currentBrandObj);
@@ -88,7 +88,7 @@ chrome.storage.local.get('whitelist', function (whitelistedObj) {
 
         if (currentBrandObj.grade.search(/D|F/) !== -1) {
 
-              if (whitelistedObj.whitelist.includes(currentBrandObj.domain)) {
+              if (request.whitelist && request.whitelist.includes(currentBrandObj.domain)) {
                 sendResponse('no-modal');
               } else {
                 $('#grade-letter').text(currentBrandObj.grade)
@@ -115,5 +115,5 @@ chrome.storage.local.get('whitelist', function (whitelistedObj) {
       }
 
   });
-});
+
 
