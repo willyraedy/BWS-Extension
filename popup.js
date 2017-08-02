@@ -19,16 +19,23 @@ function removeCompanyFromWhitelist(whitelistArr, domain) {
 
 chrome.storage.local.get('whitelist', function (whitelistedObj) {
   const whitelist = whitelistedObj.whitelist ? whitelistedObj.whitelist : [];
-
+chrome.storage.local.get('paused', function (pausedObj) {
+  const paused = pausedObj.paused;
 chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs) {
-
-    let domain = getCompanyName(tabs[0].url)
+  const domain = getCompanyName(tabs[0].url)
 
   chrome.runtime.sendMessage({type: 'request-current-company', domain}, function(response){
 
     currentCompany = response;
 
-    if (currentCompany) {
+    if (currentCompany && !paused) {
+
+      $('#pause-btn').on('click', function () {
+        chrome.storage.local.set({ paused: true }, function () {
+          window.close();
+        })
+      })
+
       if (!whitelist.includes(currentCompany.domain)) {
 
         $('#whitelist').on('click', function () {
@@ -37,9 +44,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
             if (!whitelistedComps.includes(currentCompany.domain)) whitelistedComps.push(currentCompany.domain);
 
             chrome.storage.local.set({ whitelist: whitelistedComps }, function () {
-              chrome.storage.local.get('whitelist', function (result) {
-                window.close();
-              });
+              window.close();
             });
           });
         })
@@ -50,9 +55,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
             var whitelistedComps = removeCompanyFromWhitelist(result.whitelist, domain);
 
             chrome.storage.local.set({ whitelist: whitelistedComps }, function () {
-              chrome.storage.local.get('whitelist', function (result) {
-                window.close();
-              });
+              window.close();
             });
           });
         })
@@ -83,12 +86,20 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
       }
 
 
+    } else if (paused) {
+      $('#grade-statement').text('Better World Shopping Guide is paused')
+      $('#options').hide();
+      $('#pause-btn').text('Un-pause Better World Shopping Guide')
+      $('#pause-btn').on('click', function () {
+        chrome.storage.local.set({ paused: false }, function () {
+          window.close();
+        })
+      })
+    } else {
+      $('#options').hide();
     }
   });
 
 });
-
 });
-
-
-
+});
