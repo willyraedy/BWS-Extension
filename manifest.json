@@ -4,6 +4,7 @@
   "description": "Bring Better World Shopping Guide to your browser",
   "permissions": [
     "tabs",
+    "storage",
     "http://*/*",
     "https://*/*"
   ],
@@ -21,7 +22,6 @@
         "http://*/*",
         "https://*/*"
       ],
-      "css": ["bootstrap.css" ],
       "js": ["jquery.js", "bootstrap.js", "cs.js"],
       "run_at": "document_start",
       "all_frames": true

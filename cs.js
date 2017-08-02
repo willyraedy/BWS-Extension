@@ -7,7 +7,10 @@ function getCompanyName(curURL) {
 
 let domain = getCompanyName(window.location.hostname)
 
-  chrome.runtime.sendMessage({domain}, function(response){
+chrome.storage.local.get('whitelist', function (whitelistedObj) {
+  console.log('Whitelist: ', whitelistedObj.whitelist)
+
+  chrome.runtime.sendMessage({domain, whitelist: whitelistedObj.whitelist}, function(response){
 
     if (response === 'no-modal') return;
 
@@ -136,9 +139,9 @@ let domain = getCompanyName(window.location.hostname)
       // shadowBootstrapScript.setAttribute('crossorigin', 'anonymous')
       // shadowRoot.appendChild(shadowBootstrapScript);
 
-      const testScript = document.createElement('script');
-      testScript.text = 'console.log("Please be visible")';
-      shadowRoot.appendChild(testScript);
+      // const testScript = document.createElement('script');
+      // testScript.text = 'console.log("Please be visible")';
+      // shadowRoot.appendChild(testScript);
 
       bodyEl.appendChild(hostDiv);
 
@@ -156,5 +159,5 @@ let domain = getCompanyName(window.location.hostname)
 
   })
 
-// }
+});
 
