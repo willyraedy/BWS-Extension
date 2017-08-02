@@ -25,7 +25,6 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
       if (!whitelist.includes(currentCompany.domain)) {
 
         $('#whitelist').on('click', function () {
-
           chrome.storage.local.get({ whitelist: [] }, function (result) {
             var whitelistedComps = result.whitelist;
             whitelistedComps.push(currentCompany.domain);
