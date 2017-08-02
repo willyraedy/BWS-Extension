@@ -2,3 +2,13 @@
   display: inline;
   vertical-align: middle;
 }
+
+.panel-body {
+  text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.panel-body p {
+  line-height: 1.8;
+}

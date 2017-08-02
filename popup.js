@@ -1,6 +1,7 @@
 let currentCompany
 
-console.log('In the popup.js')
+// ******
+// Helper Functions
 
 function getCompanyName(curURL) {
   let tempArr = curURL.split('.')
@@ -8,10 +9,16 @@ function getCompanyName(curURL) {
   return tempArr[idx];
 }
 
+function removeCompanyFromWhitelist(whitelistArr, domain) {
+  const removalIndex = whitelistArr.findIndex(company => company === domain);
+  const newWhitelist = whitelistArr.slice(0, removalIndex).concat(whitelistArr.slice(removalIndex + 1));
+  return newWhitelist;
+}
+
+// ******
+
 chrome.storage.local.get('whitelist', function (whitelistedObj) {
-  console.log('whitelistObj: ', whitelistedObj)
   const whitelist = whitelistedObj.whitelist ? whitelistedObj.whitelist : [];
-  console.log('Whitelist: ', whitelist)
 
 chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs) {
 
@@ -27,18 +34,28 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
         $('#whitelist').on('click', function () {
           chrome.storage.local.get({ whitelist: [] }, function (result) {
             var whitelistedComps = result.whitelist;
-            whitelistedComps.push(currentCompany.domain);
+            if (!whitelistedComps.includes(currentCompany.domain)) whitelistedComps.push(currentCompany.domain);
 
             chrome.storage.local.set({ whitelist: whitelistedComps }, function () {
               chrome.storage.local.get('whitelist', function (result) {
-                console.log('Successfully added to whitelist')
-                $('#whitelist').text(`BWSG will no longer show modals on ${result}.com`)
+                window.close();
               });
             });
           });
         })
       } else {
-        $('#whitelist').text(`Placeholder code`)
+        $('#whitelist').text(`Reactivate modals on ${domain}.com`);
+        $('#whitelist').on('click', function () {
+          chrome.storage.local.get('whitelist', function (result) {
+            var whitelistedComps = removeCompanyFromWhitelist(result.whitelist, domain);
+
+            chrome.storage.local.set({ whitelist: whitelistedComps }, function () {
+              chrome.storage.local.get('whitelist', function (result) {
+                window.close();
+              });
+            });
+          });
+        })
       }
 
       $('#grade-statement').text(`${currentCompany.brand} has an ${currentCompany.grade} rating`);
@@ -61,7 +78,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
           $('#grade-explanation').text('The \'F\' category is reserved for companies that are, according to a number of independent, third-party organizations, knowingly engaged in the destruction of the environment and/or exploitation of human beings for the purpose of increasing profits. A significant amount of data is available demonstrating that these businesses are succeeding at the expense of the natural world, other people, and future generations. Many of these companies are some of the largest and most recognizable on the planet, and they are examples of some of the most problematic behaviors in their industries, often pulling other companies in a similarly unsustainable direction in order to keep up with their ability to generate profits.')
           break;
         default:
-          return;
+          $('#grade-explanation').text('Grade not recognized.')
 
       }
 
@@ -72,3 +89,6 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 });
 
 });
+
+
+
