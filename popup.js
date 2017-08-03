@@ -62,8 +62,6 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
               window.close();
             });
           });
-          // send message to delete company from currentTabs obj (will think it's new and will show modal)
-          console.log('Tab id in callback', tabId)
           chrome.runtime.sendMessage({ type: 'remove-company-from-tabs', id: tabId }, function(response){
             // error handling???
           })
