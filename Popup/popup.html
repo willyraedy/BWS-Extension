@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,32 +13,35 @@
   <script src="popup.js"></script>
 
 </head>
+
 <body>
   <div class="panel panel-default" style="width: 500px">
-  <!-- Default panel contents -->
-  <div class="text-center panel-heading">
-    <span>
-      <img
-        src="https://lh3.googleusercontent.com/sf4zc2xjqht_4IgASyHIJRIVLyK8qJQvqYL6_dNBMzHj1ojJvhvalx3DJXmI9GZB3U4=w300-rw"
-        width="36"
-      >
-    </span><h3>Better World Shopping Guide</h3>
-  </div>
-  <div class="panel-body">
-    <h4 id="grade-statement">This company does not have a rating</h4>
-    <p id="grade-explanation"></p>
-  </div>
+    <!-- Default panel contents -->
+    <div class="text-center panel-heading">
+      <span>
+        <img
+          src="https://lh3.googleusercontent.com/sf4zc2xjqht_4IgASyHIJRIVLyK8qJQvqYL6_dNBMzHj1ojJvhvalx3DJXmI9GZB3U4=w300-rw"
+          width="36"
+        >
+      </span>
+      <h3>Better World Shopping Guide</h3>
+    </div>
+    <div class="panel-body">
+      <h4 id="grade-statement">This company does not have a rating</h4>
+      <p id="grade-explanation"></p>
+    </div>
 
-  <!-- List group -->
-  <ul class="list-group" id="bad-grade-options">
-    <li class="list-group-item" ><button id="whitelist">Stop modals from appearing on this website</button></li>
-    <li class="list-group-item">Email this company to tell them why you won't shop with them</li>
-  </ul>
-  <ul class="list-group" id="pause-button">
-    <li class="list-group-item"><button id="pause-btn">Pause Better World Shopping Guide</button></li>
-  </ul>
-</div>
+    <!-- List group -->
+    <ul class="list-group" id="whitelist-options">
+      <li class="list-group-item"><button id="whitelist-btn"></button></li>
+    </ul>
+    <ul class="list-group" id="email-options">
+      <li class="list-group-item" id="email-btn"></li>
+    </ul>
+    <ul class="list-group">
+      <li class="list-group-item" id="pause-btn"></li>
+    </ul>
+  </div>
 </body>
+
 </html>
-
-
