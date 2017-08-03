@@ -20,6 +20,9 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 
       if (companyHasBadGrade(currentCompany)) {
         $('#email-btn').text(`Email ${currentCompany.brand} to voice your concerns`)
+        $('#email-btn').on('click', function() {
+          chrome.tabs.update(tabId, { url: currentCompany.email })
+        })
 
         if (paused) {
           $('#whitelist-options').hide();
@@ -32,12 +35,20 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
         }
       } else {
         $('#email-btn').text(`Email ${currentCompany.brand} to voice your support!`)
+        $('#email-btn').on('click', function() {
+          chrome.tabs.update(tabId, { url: currentCompany.email })
+        })
         $('#whitelist-options').hide();
       }
     } else {
       $('#whitelist-options').hide();
       $('#email-options').hide();
     }
+
+    $('#visit-bws-btn').on('click', function() {
+      chrome.tabs.create({ url: 'http://www.betterworldshopper.com/' })
+    })
+
   });
 
 });
