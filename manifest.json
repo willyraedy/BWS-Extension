@@ -19,7 +19,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["./Dependencies/jquery.js", "./Dependencies/bootstrap.js", "./ContentScripts/cs.js"],
+      "js": ["./Dependencies/jquery.js", "./Dependencies/bootstrap.js", "./ContentScripts/style.js", "./ContentScripts/cs.js"],
       "run_at": "document_start",
       "all_frames": true
     }

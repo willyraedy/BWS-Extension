@@ -12,3 +12,11 @@
 .panel-body p {
   line-height: 1.8;
 }
+
+li {
+  cursor: pointer;
+}
+
+div.panel {
+  margin: 0;
+}

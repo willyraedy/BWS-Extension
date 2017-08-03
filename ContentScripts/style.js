@@ -1,0 +1,83 @@
+const styleString = `
+          .f-box {
+            background-color: #ea3b3b;
+            border-radius: 20px;
+          }
+
+          .d-box {
+            background-color: #ff9933;
+            border-radius: 20px;
+          }
+
+          #grade-letter {
+            font-size: 100px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            line-height: 120px;
+            color: white;
+            margin: 0 }
+
+          .label {
+            text-align: center; }
+
+          .modal-body span {
+            display: table;
+            margin: 0 auto; }
+
+          .modal-body ul {
+            list-style: none;
+            text-align: center;
+            padding: 0; }
+
+          .modal-body h4 {
+            margin-bottom: 25px; }
+
+          .modal-body button {
+            text-align: center;
+            display: inline; }
+
+          .modal-dialog hr {
+            margin: 5px 0 0 15px; }
+
+          .show-more {
+            color: gray; }
+
+          .modal-dialog p {
+            color: black;
+            font-size: 15px;
+          }
+
+          .modal-dialog h3 {
+            color: black;
+            font-size: 25px;
+            line-height: 35px;
+            font-weight: bold;
+            padding: 20px;
+            margin: 0;
+          }
+
+          .modal-dialog h4 {
+            color: black;
+            font-size: 20px;
+
+          }
+
+          #my-modal-dialog {
+            background-color: transparent;
+          }
+
+          .modal-dialog span {
+            font-size: 14px;
+          }
+          .modal-dialog a {
+            font-size: 14px;
+          }
+
+          .modal-dialog * {
+            font-family: Arial, Helvetica, sans-serif;
+          }
+
+          #a-rated-co, #b-rated-co, #c-rated-co {
+            margin: 0;
+          }`
+

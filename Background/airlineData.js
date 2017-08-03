@@ -19,7 +19,8 @@ let airlineCompanies = {
     grade: 'D',
     override: false,
     known: false,
-    domain: 'delta'
+    domain: 'delta',
+    email: 'https://www.delta.com/contactus/commentComplaint'
   },
   united: {
     brand: 'United',
@@ -33,7 +34,8 @@ let airlineCompanies = {
     grade: 'F',
     override: false,
     known: false,
-    domain: 'aa'
+    domain: 'aa',
+    email: 'https://www.aa.com/contact/forms?topic=CR#/topics/CR/Complaint/OTHR'
   },
   flyfrontier: {
     brand: 'Frontier',
