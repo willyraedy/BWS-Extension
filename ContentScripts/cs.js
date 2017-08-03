@@ -10,8 +10,8 @@ let domain = getCompanyName(window.location.hostname)
 chrome.storage.local.get('whitelist', function (whitelistedObj) {
   console.log('Whitelist: ', whitelistedObj.whitelist)
 
-  chrome.runtime.sendMessage({domain, whitelist: whitelistedObj.whitelist}, function(response){
-
+  chrome.runtime.sendMessage({type: 'show-modal', domain, whitelist: whitelistedObj.whitelist}, function(response){
+    console.log(response)
     if (response === 'no-modal') return;
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -25,7 +25,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
   const domain = getCompanyName(tabs[0].url)
   const tabId = tabs[0].id;
 
-  chrome.runtime.sendMessage({type: 'request-current-company', domain}, function(response){
+  chrome.runtime.sendMessage({type: 'request-company-details', domain}, function(response){
 
     currentCompany = response;
 
