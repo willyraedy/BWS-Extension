@@ -84,17 +84,16 @@ let currentTabs = {};
 let paused = false;
 
 chrome.tabs.onRemoved.addListener((tabId) => {
-  // remove that tab from currentTabs
+  removeCompanyFromTabs(currentTabs, tabId)
 })
 
 chrome.runtime.onMessage.addListener(
   function (request, sender, sendResponse) {
-    console.log('Current Tabs: ', currentTabs)
       if (request.type === 'request-current-company') {
         sendResponse(airlineCompanies[request.domain]);
       } else if (request.type === 'pause-bws') {
         paused = true;
-        // clear the currentTabs obj
+        currentTabs =  {};
       } else if (request.type === 'un-pause-bws') {
         paused = false;
       } else if (request.type === 'remove-company-from-tabs') {
@@ -144,7 +143,6 @@ chrome.runtime.onMessage.addListener(
 function removeCompanyFromTabs(currentTabsObj, tabIdToDelete) {
   Object.keys(currentTabsObj).forEach(tabId => {
     if (+tabId === tabIdToDelete) {
-      console.log('In if loop', tabId)
       delete currentTabs[tabId];
     }
   })
