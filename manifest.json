@@ -14,14 +14,11 @@
     "default_popup": "popup.html"
   },
   "background": {
-    "page": "layout.html"
+    "page": "background.html"
   },
   "content_scripts": [
     {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
+      "matches": ["http://*/*", "https://*/*"],
       "js": ["jquery.js", "bootstrap.js", "cs.js"],
       "run_at": "document_start",
       "all_frames": true

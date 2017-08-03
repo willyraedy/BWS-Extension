@@ -23,6 +23,7 @@ chrome.storage.local.get('paused', function (pausedObj) {
   const paused = pausedObj.paused;
 chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs) {
   const domain = getCompanyName(tabs[0].url)
+  const tabId = tabs[0].id;
 
   chrome.runtime.sendMessage({type: 'request-current-company', domain}, function(response){
 
@@ -33,6 +34,9 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
       $('#pause-btn').on('click', function () {
         chrome.storage.local.set({ paused: true }, function () {
           window.close();
+        })
+        chrome.runtime.sendMessage({type: 'pause-bws'}, function(response){
+          // error handling???
         })
       })
 
@@ -58,6 +62,11 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
               window.close();
             });
           });
+          // send message to delete company from currentTabs obj (will think it's new and will show modal)
+          console.log('Tab id in callback', tabId)
+          chrome.runtime.sendMessage({ type: 'remove-company-from-tabs', id: tabId }, function(response){
+            // error handling???
+          })
         })
       }
 
@@ -93,6 +102,9 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
       $('#pause-btn').on('click', function () {
         chrome.storage.local.set({ paused: false }, function () {
           window.close();
+        })
+        chrome.runtime.sendMessage({type: 'un-pause-bws'}, function(response){
+          // error handling???
         })
       })
     } else {

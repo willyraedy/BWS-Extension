@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<title>Better World Shopping Guide Extension</title>
+
+<head>
+
+  <link href="bootstrap.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <script src='jquery.js'></script>
+  <script src='bootstrap.js'></script>
+  <script src='background.js'></script>
+
+</head>
+
+<body>
+
+  <!-- Modal -->
+  <div id='modal-wrapper'>
+    <div class="modal fade" id="bws-modal" tabindex="-1" role="dialog" aria-labelledby="bws-modal" aria-hidden="true" id="bws-modal">
+      <div class="modal-dialog" role="document" id="my-modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class='container-fluid'>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class='row'>
+                <div class='col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4' id="grade-box">
+                  <h1 class="text-center" id="grade-letter"></h1>
+                </div>
+              </div>
+              <h3 class='text-center' id='grade-statement'></h3>
+              <p class='text-center' id='grade-explanation'></p>
+              <!--<a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>-->
+
+            </div>
+
+          </div>
+          <div class="modal-body">
+            <h4>Consider shopping at one of these companies instead:</h4>
+            <div class='row'>
+              <div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>
+                <span class="label label-success">A Rating</span>
+                <hr>
+                <ul>
+                  <li>N/A</li>
+                  <!--<li>
+                    <a class="show-more" data-toggle="collapse" href="#a-rated-co" aria-expanded="false" aria-controls="a-rated-co">
+                   Show more...
+                  </a>
+                    <div class="collapse" id="a-rated-co">
+                      <div class="card card-block">
+                        <ul id='a-list'>
+                          <li><a href='#'>Placeholder</a></li>
+                          <li><a href='#'>Placeholder</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>-->
+                </ul>
+              </div>
+              <div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>
+                <span class="label label-primary">B Rating</span>
+                <hr>
+                <ul id='b-list'>
+                  <li><a href='https://www.jetblue.com'>Jet Blue</a></li>
+                  <li><a href='https://www.southwest.com'>Southwest Airlines</a></li>
+                  <li><a href='https://www.alaskaair.com'>Alaska Air</a></li>
+                  <li><a href='https://www.flyfrontier.com'>Frontier</a></li>
+                  <li><a href='https://www.virginamerica.com'>Virgin</a></li>
+                  <!--<li>
+                    <a class="show-more" data-toggle="collapse" href="#b-rated-co" aria-expanded="false" aria-controls="b-rated-co">
+                   Show more...
+                  </a>
+                    <div class="collapse" id="b-rated-co">
+                      <div class="card card-block">
+                        <ul>
+                          <li><a href='https://www.alaskaair.com'>Alaska Air</a></li>
+                          <li><a href='https://www.flyfrontier.com'>Frontier</a></li>
+                          <li><a href='https://www.virginamerica.com'>Virgin</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>-->
+                </ul>
+              </div>
+              <div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>
+                <span class="label label-default">C Rating</span>
+                <hr>
+                <ul id='c-list'>
+                  <li><a href='https://www.spirit.com'>Spirit</a></li>
+                  <li><a href='https://www.easyjet.com'>Easy Jet</a></li>
+                  <li><a href='https://www.britishairways.com'>British Airways</a></li>
+                  <!--<li>
+                    <a class="show-more" data-toggle="collapse" href="#c-rated-co" aria-expanded="false" aria-controls="c-rated-co">
+                   Show more...
+                  </a>
+                    <div class="collapse" id="c-rated-co">
+                      <div class="card card-block">
+                        <ul>
+                          <li><a href='https://www.easyjet.com'>Easy Jet</a></li>
+                          <li><a href='https://www.britishairways.com'>British Airways</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>-->
+                </ul>
+              </div>
+          </div>
+        </div>
+        <!--<h5>Tooltips in a modal</h5>
+          <p><a href="#" class="tooltip-test" title="Tooltip">This link</a> and <a href="#" class="tooltip-test" title="Tooltip">that link</a>            have tooltips on hover.</p>-->
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
