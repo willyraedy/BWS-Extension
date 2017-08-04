@@ -22,6 +22,12 @@
       "js": ["./Dependencies/jquery.js", "./Dependencies/bootstrap.js", "./ContentScripts/style.js", "./ContentScripts/cs.js"],
       "run_at": "document_start",
       "all_frames": true
+    },
+    {
+      "matches": ["https://www.kayak.com/flights/*"],
+      "js": ["./ContentScripts/highlightText.js"],
+      "run_at": "document_start",
+      "all_frames": true
     }
   ],
   "manifest_version": 2
