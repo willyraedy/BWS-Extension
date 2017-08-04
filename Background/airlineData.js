@@ -1,5 +1,4 @@
 let airlineCompanies = {
-  id: 'dev',
   southwest: {
     brand: 'Southwest',
     grade: 'B',
@@ -45,21 +44,21 @@ let airlineCompanies = {
     domain: 'flyfrontier'
   },
   virginamerica: {
-    brand: 'Virgin',
+    brand: 'Virgin America',
     grade: 'B',
     override: false,
     known: false,
     domain: 'virginamerica'
   },
   spirit: {
-    brand: 'Spirit',
+    brand: 'Spirit Airlines',
     grade: 'C',
     override: false,
     known: false,
     domain: 'spirit'
   },
   alaskaair: {
-    brand: 'Alaskan Airlines',
+    brand: 'Alaska Airlines',
     grade: 'B',
     override: false,
     known: false,
