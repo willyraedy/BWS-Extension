@@ -12,7 +12,7 @@ function findString(node, searchString) {
   const afterTextNode = node.splitText(lastIdx)
   const textToWrapNode = node.splitText(firstIdx)
 
-  const color = '#ea3b3b';
+  const color = setColor(companyText);
 
   const underlineEl = document.createElement('u');
   underlineEl.appendChild(textToWrapNode);
@@ -62,3 +62,26 @@ document.addEventListener('DOMContentLoaded', function () {
   if (target) observer.observe(target, config);
 
 });
+
+// Helper functions
+
+const companyArr = Object.keys(airlineCompanies).map(key => airlineCompanies[key])
+
+function setColor(companyBrand) {
+  const currentCompany = companyArr.find(compObj => compObj.brand === companyBrand)
+  switch (currentCompany.grade) {
+     case 'A':
+      return '#5cb85c';
+    case 'B':
+      return '#428bca;'
+    case 'C':
+      return 'gray';
+    case 'D':
+      return '#ff9933';
+    case 'F':
+      return '#ea3b3b';
+    default:
+      return 'gray';
+  }
+}
+
