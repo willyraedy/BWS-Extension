@@ -12,24 +12,39 @@ function findString(node, searchString) {
   const afterTextNode = node.splitText(lastIdx)
   const textToWrapNode = node.splitText(firstIdx)
 
-  const color = setColor(companyText);
+  const [grade, color] = setColorAndGrade(companyText);
 
-  const underlineEl = document.createElement('u');
-  underlineEl.appendChild(textToWrapNode);
-  underlineEl.setAttribute('style', `color:${color}`);
-  node.parentNode.insertBefore(underlineEl, afterTextNode)
+  textToWrapNode.nodeValue += ` (${grade})`
+
+  const wrapperElement = document.createElement('a');
+  wrapperElement.className = 'bws-tooltip';
+  const tooltipElement = document.createElement('span');
+  tooltipElement.className = 'bws-tooltiptext';
+  tooltipElement.innerHTML = `This company was rated a <em>'${grade}'</em> by the Better World Shopping Guide.`;
+  wrapperElement.appendChild(tooltipElement);
+
+
+
+  wrapperElement.appendChild(textToWrapNode);
+  wrapperElement.setAttribute('style', `color:${color}`);
+  // wrapperElement.setAttribute('data-toggle', 'tooltip');
+  // wrapperElement.setAttribute('id', 'bws-tooltip');
+  // wrapperElement.setAttribute('href', 'http://www.betterworldshopper.com/');
+  // wrapperElement.setAttribute('target', '_blank');
+  // wrapperElement.setAttribute('title', `This company was rated an ${grade} by the Better World Shopping Guide.`);
+  node.parentNode.insertBefore(wrapperElement, afterTextNode)
 }
 
 function traverseDOM(root) {
   console.log('The root is ', root)
   let queue = [root]
   let headPointer = 0;
-  let tailPointer = 0;
-  while (tailPointer >= headPointer) {
+  let tailPointer = 1;
+  while (tailPointer > headPointer) {
     let node = queue[headPointer];
     let childNode = node.firstChild
     while (childNode) {
-      queue.push(childNode)
+      queue[tailPointer] = childNode;
       tailPointer++;
       childNode = childNode.nextSibling
     }
@@ -67,21 +82,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
 const companyArr = Object.keys(airlineCompanies).map(key => airlineCompanies[key])
 
-function setColor(companyBrand) {
-  const currentCompany = companyArr.find(compObj => compObj.brand === companyBrand)
+function setColorAndGrade(companyBrand) {
+  const currentCompany = companyArr.find(compObj => compObj.brand === companyBrand);
+  const resultArr = [currentCompany.grade]
   switch (currentCompany.grade) {
      case 'A':
-      return '#5cb85c';
+      resultArr.push('#5cb85c');
+      break;
     case 'B':
-      return '#428bca;'
+      resultArr.push('#428bca');
+      break;
     case 'C':
-      return 'gray';
+      resultArr.push('gray');
+      break;
     case 'D':
-      return '#ff9933';
+      resultArr.push('#ff9933');
+      break;
     case 'F':
-      return '#ea3b3b';
+      resultArr.push('#ea3b3b');
+      break;
     default:
-      return 'gray';
+      resultArr.push('gray');
   }
+  return resultArr;
 }
 

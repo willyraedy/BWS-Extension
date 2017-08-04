@@ -25,6 +25,7 @@
     },
     {
       "matches": ["https://www.kayak.com/flights/*"],
+      "css": ["./ContentScripts/tooltipStyles.css"],
       "js": ["./Background/airlineData.js", "./ContentScripts/highlightText.js"],
       "run_at": "document_start",
       "all_frames": true
