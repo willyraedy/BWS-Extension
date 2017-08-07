@@ -41,7 +41,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
         $('#whitelist-options').hide();
       }
     } else {
-      $('#grade-statement').text(`${domain}.com does not have a rating`);
+      $('#grade-statement').text(`${domain} does not have a rating`);
       $('#whitelist-options').hide();
       $('#email-options').hide();
     }
@@ -83,6 +83,8 @@ function createPauseButton() {
     })
     chrome.runtime.sendMessage({ type: 'pause-bws' }, function (response) {
       // error handling???
+      console.log('In pause button')
+      chrome.browserAction.setIcon({path: '../x-mark-3-256.png'});
     })
   })
 }
@@ -95,6 +97,8 @@ function createUnpauseButton() {
     })
     chrome.runtime.sendMessage({ type: 'un-pause-bws' }, function (response) {
       // error handling???
+      console.log('In un-pause button')
+      chrome.browserAction.setIcon({path: '../bws_logo.png'})
     })
   })
 }

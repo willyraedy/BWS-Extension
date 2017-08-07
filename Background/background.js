@@ -5,6 +5,10 @@ chrome.tabs.onRemoved.addListener((tabId) => {
   removeCompanyFromTabs(currentTabs, tabId)
 })
 
+chrome.storage.local.get('paused', function (pausedObj) {
+  paused = pausedObj.paused;
+});
+
 chrome.runtime.onMessage.addListener(
   function (request, sender, sendResponse) {
     switch (request.type) {
