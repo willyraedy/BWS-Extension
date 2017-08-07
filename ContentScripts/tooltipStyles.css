@@ -1,18 +1,7 @@
-/* #bws-tooltip:hover {
-  text-decoration: underline;
-} */
-
-/* .bws-tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-} */
-
-/* Tooltip text */
 .bws-tooltip .bws-tooltiptext {
     visibility: hidden;
     width: 220px;
-     background-color: #e8edf4;
+    background-color: #e8edf4;
     color: black;
     text-align: center;
     padding: 5px 0;
@@ -25,7 +14,6 @@
     z-index: 1;
 }
 
-/* Show the tooltip text when you mouse over the tooltip container */
 .bws-tooltip:hover .bws-tooltiptext {
     visibility: visible;
 }

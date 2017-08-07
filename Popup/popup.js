@@ -41,6 +41,7 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
         $('#whitelist-options').hide();
       }
     } else {
+      $('#grade-statement').text(`${domain}.com does not have a rating`);
       $('#whitelist-options').hide();
       $('#email-options').hide();
     }

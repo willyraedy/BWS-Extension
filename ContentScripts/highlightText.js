@@ -1,10 +1,9 @@
-const nameArr = Object.keys(airlineCompanies).map(key => airlineCompanies[key].brand)
-const nameRegexString = "/" + nameArr.join("|") + "/";
-const regex = new RegExp(nameRegexString);
+const regex = makeCompanyRegex();
 
-function findString(node, searchString) {
+function colorCodeCompanyNames(node) {
   const match = regex.exec(node.nodeValue)
   if (!match) return;
+
   const firstIdx = match.index;
   const companyText = match[0];
   const lastIdx = firstIdx + companyText.length;
@@ -14,29 +13,10 @@ function findString(node, searchString) {
 
   const [grade, color] = setColorAndGrade(companyText);
 
-  textToWrapNode.nodeValue += ` (${grade})`
-
-  const wrapperElement = document.createElement('a');
-  wrapperElement.className = 'bws-tooltip';
-  const tooltipElement = document.createElement('span');
-  tooltipElement.className = 'bws-tooltiptext';
-  tooltipElement.innerHTML = `This company was rated a <em>'${grade}'</em> by the Better World Shopping Guide.`;
-  wrapperElement.appendChild(tooltipElement);
-
-
-
-  wrapperElement.appendChild(textToWrapNode);
-  wrapperElement.setAttribute('style', `color:${color}`);
-  // wrapperElement.setAttribute('data-toggle', 'tooltip');
-  // wrapperElement.setAttribute('id', 'bws-tooltip');
-  // wrapperElement.setAttribute('href', 'http://www.betterworldshopper.com/');
-  // wrapperElement.setAttribute('target', '_blank');
-  // wrapperElement.setAttribute('title', `This company was rated an ${grade} by the Better World Shopping Guide.`);
-  node.parentNode.insertBefore(wrapperElement, afterTextNode)
+  colorCodeCompanyName(textToWrapNode, afterTextNode, node, grade, color)
 }
 
 function traverseDOM(root) {
-  console.log('The root is ', root)
   let queue = [root]
   let headPointer = 0;
   let tailPointer = 1;
@@ -48,10 +28,9 @@ function traverseDOM(root) {
       tailPointer++;
       childNode = childNode.nextSibling
     }
-    if (node.nodeType === 3) findString(node)
+    if (node.nodeType === 3) colorCodeCompanyNames(node)
     headPointer++;
   }
-  console.log(queue.length);
   queue = null;
 }
 
@@ -80,6 +59,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Helper functions
 
+function makeCompanyRegex() {
+  const nameArr = Object.keys(airlineCompanies).map(key => airlineCompanies[key].brand)
+  const nameRegexString = "/" + nameArr.join("|") + "/";
+  const result = new RegExp(nameRegexString);
+  return result
+}
+
 const companyArr = Object.keys(airlineCompanies).map(key => airlineCompanies[key])
 
 function setColorAndGrade(companyBrand) {
@@ -107,3 +93,23 @@ function setColorAndGrade(companyBrand) {
   return resultArr;
 }
 
+function colorCodeCompanyName(textToWrapNode, afterTextNode, node, grade, color) {
+  textToWrapNode.nodeValue += ` (${grade})`;
+
+  const wrapperElement = document.createElement('p');
+  wrapperElement.className = 'bws-tooltip';
+
+  const tooltipElement = document.createElement('span');
+  tooltipElement.className = 'bws-tooltiptext';
+  tooltipElement.innerHTML = `This company was rated a <em>'${grade}'</em> by the Better World Shopping Guide.`;
+  wrapperElement.appendChild(tooltipElement);
+
+  wrapperElement.appendChild(textToWrapNode);
+  wrapperElement.setAttribute('style', `color:${color}`);
+  // wrapperElement.setAttribute('data-toggle', 'tooltip');
+  // wrapperElement.setAttribute('id', 'bws-tooltip');
+  // wrapperElement.setAttribute('href', 'http://www.betterworldshopper.com/');
+  // wrapperElement.setAttribute('target', '_blank');
+  // wrapperElement.setAttribute('title', `This company was rated an ${grade} by the Better World Shopping Guide.`);
+  node.parentNode.insertBefore(wrapperElement, afterTextNode)
+}
